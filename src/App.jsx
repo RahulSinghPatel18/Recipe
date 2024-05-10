@@ -1,20 +1,30 @@
-import React from 'react'
-import Home from './Components/Home'
-import Recipe from './Components/Recipe'
-import About from './Components/About'
-import Contact from './Components/Contact'
-import Navbar from './Components/Navbar'
-import RoutesComponents from './Routes/RoutesComponents'
-
+import React from "react";
+import Nav from "./components/Nav";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Recipes from "./components/Recipes";
+import Details from "./components/Details";
+import Create from "./components/Create";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Update from "./components/Update";
 
 const App = () => {
-  return (
-    <div className='w-screen h-screen'>
-   <Navbar/>
-   <RoutesComponents/>
-      
-    </div>
-  )
-}
+    return (
+        <div className="w-[80%] m-auto ">
+            <Nav />
 
-export default App
+            <Routes>
+                <Route path="/" element={<Layout />} />
+                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/recipes/:id" element={<Details />} />
+                <Route path="/create-recipe" element={<Create />} />
+                <Route path="/update-recipe/:id" element={<Update />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
+        </div>
+    );
+};
+
+export default App;

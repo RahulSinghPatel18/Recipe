@@ -1,11 +1,10 @@
-import React from 'react'
-import { Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import 'remixicon/fonts/remixicon.css'
 
-const Navbar = () => {
-  return (
-    <div>
-      
-     <nav className="px-20 h-[9vh] w-full flex items-center justify-between ">
+const Nav = () => {
+    return (
+        <nav className="h-[10vh] w-full flex items-center justify-between ">
             <img
                 className="h-full"
                 src="https://static.vecteezy.com/system/resources/thumbnails/008/212/813/small/cooking-logo-design-vector.jpg"
@@ -17,7 +16,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                     className="hover:text-green-600 duration-200"
-                    to="/recipe"
+                    to="/recipes"
                 >
                     Recipes
                 </Link>
@@ -31,14 +30,9 @@ const Navbar = () => {
                     Contact
                 </Link>
             </div>
-            <img
-                className="h-[80%]"
-               src='https://static.thenounproject.com/png/102109-200.png'
-                alt=""
-            />
+            <i className="text-3xl ri-grid-fill text-green-600"></i>
         </nav>
-    </div>
-  )
-}
+    );
+};
 
-export default Navbar
+export default Nav;

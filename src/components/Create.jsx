@@ -1,44 +1,43 @@
-import { useContext, useState } from "react";
+import { nanoid } from "nanoid";
+import React, { useContext, useState } from "react";
 import { Recipecontext } from "../contexts/RecipeContext";
-import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const Update = () => {
+const Create = () => {
     const navigate = useNavigate();
-    const params = useParams();
     const [recipes, setrecipes] = useContext(Recipecontext);
-    const recipe = recipes && recipes.find((r) => r.id == params.id);
 
-    const [image, setimage] = useState(recipe.image);
-    const [title, settitle] = useState(recipe.title);
-    const [description, setdescription] = useState(recipe.description);
-    const [ingredients, setingredients] = useState(recipe.ingredients);
-    const [instructions, setinstructions] = useState(recipe.instructions);
+    const [image, setimage] = useState("");
+    const [title, settitle] = useState("");
+    const [description, setdescription] = useState("");
+    const [ingredients, setingredients] = useState("");
+    const [instructions, setinstructions] = useState("");
 
-    const UpdateHandler = (e) => {
+    const SubmitHandler = (e) => {
         e.preventDefault();
-        const updatedRecipe = {
-            id: recipe.id,
-            title,
+        const newRecipe = {
+            id: nanoid(),
             image,
+            title,
             description,
             ingredients,
             instructions,
         };
-        const copyRecipe = [...recipes];
-        const recipeIndex = recipes.findIndex((r) => r.id == params.id);
-        copyRecipe[recipeIndex] = updatedRecipe;
-        setrecipes(updatedRecipe);
+        setrecipes([...recipes, newRecipe]);
 
-        localStorage.setItem("recipes", JSON.stringify(copyRecipe));
-        toast.success("Recipe Updated Successfully!");
+        // sets the data in the localStorge of the browser
+        localStorage.setItem(
+            "recipes",
+            JSON.stringify([...recipes, newRecipe])
+        );
+        toast.success("Recipe Created Successfully!");
         navigate("/recipes");
     };
-
-    return recipe ? (
-        <form onSubmit={UpdateHandler} className="w-[70%] m-auto  ">
+    return (
+        <form onSubmit={SubmitHandler} className="w-[70%] m-auto  pb-5">
             <h1 className="text-7xl mt-5 font-extrabold text-green-600 mb-[5%]">
-                Update <br /> Existing Recipe
+                Create <br /> New Recipe
             </h1>
             <input
                 onChange={(e) => setimage(e.target.value)}
@@ -74,15 +73,11 @@ const Update = () => {
             ></textarea>
             <div className="w-full text-right">
                 <button className="rounded-md text-xl bg-green-600 text-white py-2 px-5 hover:bg-green-700 duration-200">
-                    Re-Publish Recipe &nbsp; &#8594;
+                    Publish Recipe &nbsp; &#8594;
                 </button>
             </div>
         </form>
-    ) : (
-        <h1 className="w-full text-center text-4xl text-green-600 mt-10">
-            Loading Recipe...
-        </h1>
     );
 };
 
-export default Update;
+export default Create;
