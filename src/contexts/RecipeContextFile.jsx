@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const Recipecontext = createContext(null);
 
-const RecipeContext = (props) => {
+const RecipeContextFile = (props) => {
     const [recipes, setrecipes] = useState([]);
     useEffect(() => {
         setrecipes(JSON.parse(localStorage.getItem("recipes")) || []);
@@ -15,4 +15,4 @@ const RecipeContext = (props) => {
     );
 };
 
-export default RecipeContext;
+export default RecipeContextFile;

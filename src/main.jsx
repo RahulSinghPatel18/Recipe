@@ -5,14 +5,14 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RecipeContext from "./contexts/RecipeContext.jsx";
+import RecipeContextFile from "./contexts/RecipeContextFile.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
-        <RecipeContext>
+        <RecipeContextFile>
             <App />
             <ToastContainer />
-        </RecipeContext>
+        </RecipeContextFile>
     </BrowserRouter>
 );
 
